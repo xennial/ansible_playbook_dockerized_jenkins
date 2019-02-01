@@ -1,0 +1,11 @@
+- hosts: all 
+  roles: 
+    - common
+  tags:
+    - common
+    
+- hosts: all
+  roles:
+    - docker
+  tags: 
+    - docker

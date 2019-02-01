@@ -1,0 +1,23 @@
+- name: Make sure all packages are up to date
+  apt:
+    update_cache: yes
+    
+- name: Make sure aptitude is installed (needed by ansible for some other tasks)
+  apt:
+    name: aptitude
+    state: present
+    
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: Ensure python pexpect module is installed (needed for ansible expect module)
+  apt:
+    name: python-pexpect
+    state: present
+    
+- name: Install debconf utils
+  apt:
+    name: debconf-utils
+    state: latest
