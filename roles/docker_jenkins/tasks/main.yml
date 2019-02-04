@@ -1,0 +1,7 @@
+# name: Create a directory for Jenkins settings
+# file: 
+
+name: Pull down and run official Jenkins container
+command: docker run-helloworld
+
+

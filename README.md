@@ -2,9 +2,10 @@ This ansible playbook is designed to install Jenkins docker container on to a di
 
 The playbook does the following
 
-1. Installs Docker-CE following the steps laid out in this excellent guide
+1. Installs Docker-CE following the steps laid out in this official guide
 
-https://getintodevops.com/blog/building-your-first-docker-image-with-jenkins-2-guide-for-developers?rq=jenkins
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
 
 2. Sets up the Docker port work correctly following the official docker documentation
 
@@ -12,6 +13,11 @@ https://getintodevops.com/blog/building-your-first-docker-image-with-jenkins-2-g
 https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
 
 4. Installs Jenkins plugins??
+
+
+5. To do /Future updates
+Make second internal network address in docker daemon.json dynamic with something like:
+ifconfig docker0 | grep 'inet addr:' | cut -d: -f2
 
 Final notes
 
