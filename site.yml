@@ -9,3 +9,9 @@
     - docker
   tags: 
     - docker
+    
+- hosts: all
+  roles:
+    - docker_jenkins
+  tags:
+    - docker_jenkins

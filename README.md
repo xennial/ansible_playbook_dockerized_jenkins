@@ -11,11 +11,15 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 3. Pulls down and sets up the official Jenkins docker container and maps the socket volume on to that of the host machine. This is to avoid issues of running Docker in Docker. For more information on the problems with Docker in Docker please see this article
 https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
+The below is also a very useful article to read if you'd like to do this set up manually:
+https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
-4. Installs Jenkins plugins??
+4. Runs the Jenkins container on port 8080. Mounts also bind mounts jenkins settings to the directory /var/jenkins_docker_config on the host
+
+5. Installs Jenkins plugins??
 
 
-5. To do /Future updates
+6. To do /Future updates
 Make second internal network address in docker daemon.json dynamic with something like:
 ifconfig docker0 | grep 'inet addr:' | cut -d: -f2
 

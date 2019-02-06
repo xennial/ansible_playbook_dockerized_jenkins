@@ -1,7 +1,30 @@
-# name: Create a directory for Jenkins settings
-# file: 
+- name: Create a directory for Jenkins settings
+  file: 
+    path: /var/jenkins_docker_config
+    state: directory
+    mode: 0775
 
-name: Pull down and run official Jenkins container
-command: docker run-helloworld
+- name: Create directory for dockerfiles and jenkins container
+  file:
+    path: /dockerfiles/jenkinscontainer
+    state: directory
+    mode: 0775
+
+- name: Copy jenkins dockerfile to remote host
+  copy:
+    src: Dockerfile
+    dest: /dockerfiles/jenkinscontainer/Dockerfile
+
+- name: Build jenkins container image based of official jenkins container
+  command: docker build -q -t jenkinsdocker /dockerfiles/jenkinscontainer
+
+- name: Run Jenkins container and bind socket volumes on host and container. Also bind mount the Jenkins settings directory, so it is not lost if container is deleted
+  command: docker run -d \
+        -p 8080:8080 \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/jenkins_docker_config:/var/jenkins_home \
+        --name jenkins jenkinsdocker
+
+
 
 
