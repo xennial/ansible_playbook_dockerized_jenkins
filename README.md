@@ -1,4 +1,15 @@
-This ansible playbook is designed to install Jenkins docker container on to a digital ocean Ubuntu 16 instance. Though it will likely work with any cloud provider, it has only been tested on Digital Ocean
+Ansible Script for Provisioning Dockerized Jenkins on Ubuntu
+
+This ansible playbook is designed to install Jenkins docker container on to a digital ocean Ubuntu 16 instance. Though it will likely work with any cloud provider (and Debian system), it has only been tested on Digital Ocean.
+
+TLDR
+How to run:
+
+Create a hosts/inventory file in the root of this directory for Ansible and run the command below:
+
+ansible-playbook -i your_hosts_file site.yml -u youruser --private-key ~/.ssh/your_private_key 
+
+Change youruser and your_private_key to your own values
 
 The playbook does the following
 
