@@ -1,15 +1,15 @@
-- hosts: all 
-  roles: 
+- hosts: all
+  roles:
     - common
   tags:
     - common
-    
+
 - hosts: all
   roles:
     - docker
-  tags: 
+  tags:
     - docker
-    
+
 - hosts: all
   roles:
     - docker_jenkins

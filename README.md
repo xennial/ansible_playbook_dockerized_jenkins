@@ -1,15 +1,16 @@
-Ansible Script for Provisioning Dockerized Jenkins on Ubuntu
+# Ansible Script for Provisioning Dockerized Jenkins on Ubuntu
 
 This ansible playbook is designed to install Jenkins docker container on to a digital ocean Ubuntu 16 instance. Though it will likely work with any cloud provider (and Debian system), it has only been tested on Digital Ocean.
 
-TLDR
-How to run:
+## How to run:
 
-Create a hosts/inventory file in the root of this directory for Ansible and run the command below:
+This assumes you have Ansible [installed and running already](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#what-version-to-pick).
 
-ansible-playbook -i your_hosts_file site.yml -u youruser --private-key ~/.ssh/your_private_key 
+Create your hosts inventory file `your_hosts_file` in the root of this directory and run the command below:
 
-Change youruser and your_private_key to your own values
+    ansible-playbook -i your_hosts_file site.yml -u your_user --private-key ~/.ssh/your_private_key
+
+Change `your_user` and `your_private_key` to your own values
 
 The playbook does the following
 
@@ -38,17 +39,17 @@ Final notes
 
 Use this user data when you first create the droplet to avoid having to install python
 
-#cloud-config
+    #cloud-config
 
-runcmd:
- - apt-get install -y python2.7
- - ln -s /usr/bin/python2.7 /usr/bin/python
- 
- 
+    runcmd:
+    - apt-get install -y python2.7
+    - ln -s /usr/bin/python2.7 /usr/bin/python
+
+
 
 You can check the integrity of the docker-ce package by checking the GPG key. Instructions are listed here about half way down the page:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
- 
+
 
 If you require more security consider using this role:
 <insert link here>
