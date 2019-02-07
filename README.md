@@ -6,6 +6,8 @@ This ansible playbook is designed to install Jenkins docker container on to a di
 
 This assumes you have Ansible [installed and running already](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#what-version-to-pick).
 
+This also assumes there is not a copy of jenkins running on your host machine already. It is recommended that you run this role on a newly created droplet/instance.
+
 Create your hosts inventory file `your_hosts_file` in the root of this directory and run the command below:
 
     ansible-playbook -i your_hosts_file site.yml -u your_user --private-key ~/.ssh/your_private_key
@@ -26,18 +28,15 @@ https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
 The below is also a very useful article to read if you'd like to do this set up manually:
 https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
-4. Runs the Jenkins container on port 8080. Mounts also bind mounts jenkins settings to the directory /var/jenkins_docker_config on the host
+4. Runs the Jenkins container on port 8080. Mounts also mounts jenkins settings directory on the container to the directory /var/jenkins_home on the host.
 
-5. Installs Jenkins plugins??
-
-
-6. To do /Future updates
+5. To do /Future updates
 Make second internal network address in docker daemon.json dynamic with something like:
 ifconfig docker0 | grep 'inet addr:' | cut -d: -f2
 
-Final notes
+7. Final notes:
 
-Use this user data when you first create the droplet to avoid having to install python
+You can use this user data when you first create the droplet to avoid having to install python
 
     #cloud-config
 
@@ -51,5 +50,3 @@ You can check the integrity of the docker-ce package by checking the GPG key. In
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 
-If you require more security consider using this role:
-<insert link here>

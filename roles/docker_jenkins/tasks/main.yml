@@ -1,6 +1,6 @@
 - name: Create a directory for Jenkins settings
   file: 
-    path: /var/jenkins_docker_config
+    path: /var/jenkins_home
     state: directory
     mode: 0775
 
@@ -22,7 +22,7 @@
   command: docker run -d \
         -p 8080:8080 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        -v /var/jenkins_docker_config:/var/jenkins_home \
+        -v /var/jenkins_home:/var/jenkins_home \
         --name jenkins jenkinsdocker
 
 
