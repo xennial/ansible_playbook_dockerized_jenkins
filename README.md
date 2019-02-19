@@ -28,11 +28,24 @@ https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
 The below is also a very useful article to read if you'd like to do this set up manually:
 https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
-4. Runs the Jenkins container on port 8080. Mounts also mounts jenkins settings directory on the container to the directory /var/jenkins_home on the host.
+4. Runs the Jenkins container on port 8080. Also mounts the jenkins settings directory on the container to the directory /var/jenkins_home on the host.
 
-5. To do /Future updates
-Make second internal network address in docker daemon.json dynamic with something like:
-ifconfig docker0 | grep 'inet addr:' | cut -d: -f2
+5. To do / List of Future updates
+  * Make second internal network address in docker daemon.json dynamic with something like:
+  
+          ifconfig docker0 | grep 'inet addr:' | cut -d: -f2
+  * Add a script to ensure Jenkins docker image is able to restart automatically if the server shutsdown/restarts. The following steps need to be added:
+      * Add a "--restart always" flag to docker run command.
+      * Add "is docker running check" to monit
+      * The ip address of the docker0 device needs to be removed from the /etc/docker/daemon.json file. Get this value with something like:
+            ifconfig docker0 | grep inet | awk '{ print $2 }'
+      If it isn't removed docker will not start.
+      * The systemctl daemon needs to be reloaded for the above to take effect:
+            systemctl daemon-reload
+            
+      * Restart docker.
+      * Now docker is running again, /etc/docker/daemon.json needs to be edited to include the ip address of the docker0 device.
+      * Reload systemctl and restart docker
 
 7. Final notes:
 

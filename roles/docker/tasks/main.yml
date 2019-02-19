@@ -63,7 +63,7 @@
     src: docker.conf
     dest: /etc/systemd/system/docker.service.d/docker.conf
 
-- name: Reload system control (necessary for changes to docker.conf and daemon.json to take effect)
+- name: Reload system control daemon(necessary for changes to docker.conf and daemon.json to take effect)
   command: systemctl daemon-reload
 
 - name: Restart docker
